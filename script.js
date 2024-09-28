@@ -44,3 +44,43 @@ function mostrarLista() {
 }
 
 
+document.getElementById('botonAbc').addEventListener('click', ordenAscendente);
+
+function ordenAscendente() {
+
+    let lista = JSON.parse(localStorage.getItem('fullName')) || [];
+    // Ordenamos la lista en orden alfabético, a.localeCompare(b) nos asegura que la lista se ordenará alfabéticamente 
+    lista.sort((a, b) => a.localeCompare(b));
+    // Actualizamos el localStorage con la lista ordenada
+    localStorage.setItem('fullName', JSON.stringify(lista));
+    mostrarLista();
+
+}
+
+document.getElementById('botonZyx').addEventListener('click', ordenDescendente);
+
+function ordenDescendente() {
+
+    let lista = JSON.parse(localStorage.getItem('fullName')) || [];
+    
+    lista.sort((a, b) => b.localeCompare(a));
+
+    localStorage.setItem('fullName', JSON.stringify(lista));
+    mostrarLista();
+
+}
+
+// función para borrar todo el contenedor 
+document.getElementById('limpiarTodo').addEventListener('click', limpiarContenedor);
+
+function limpiarContenedor() {
+    
+    localStorage.removeItem('fullName');
+
+    
+    const contenedorItems = document.getElementById('contenedor');
+    contenedorItems.innerHTML = '';
+
+    // Opcionalmente, si tienes un array lista en memoria, puedes vaciarlo también
+    lista = [];
+}
